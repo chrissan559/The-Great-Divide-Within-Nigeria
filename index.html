@@ -6,542 +6,186 @@
 <title>The Great Divide: Why Some Nigerians Rise While Others Work Harder and Sink</title>
 <meta name="description" content="The dividing line isn't the industry. It's whether you own the asset, earn in hard currency, and control distribution, or rent out your time in naira.">
 <meta name="author" content="Kaizen Chris">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
-
-<style>
-  /* ---------- Design tokens ---------- */
-  :root {
-    --paper: #F5F7F4;
-    --ink: #14211B;
-    --muted: #55645C;
-    --rule: #CBD5CE;
-
-    --rise: #0E6B3F;
-    --rise-tint: #E6F2EA;
-    --sink: #B4382C;
-    --sink-tint: #F8E9E6;
-    --gold: #B8861B;
-
-    --display: "Bricolage Grotesque", "Trebuchet MS", "Segoe UI", sans-serif;
-    --text: "Source Serif 4", Georgia, "Times New Roman", serif;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; }
-
-  html { -webkit-text-size-adjust: 100%; }
-
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--text);
-    font-size: 1.0625rem;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .wrap {
-    width: min(100% - 2.5rem, 64rem);
-    margin-inline: auto;
-  }
-
-  .narrow { max-width: 42rem; }
-
-  /* ---------- Masthead ---------- */
-  .masthead {
-    padding: clamp(3rem, 9vw, 6.5rem) 0 clamp(2rem, 5vw, 3.5rem);
-    border-bottom: 1px solid var(--rule);
-  }
-
-  h1 {
-    margin: 0;
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: clamp(2.4rem, 7vw, 4.75rem);
-    line-height: 1.02;
-    letter-spacing: -0.025em;
-    text-wrap: balance;
-    max-width: 18ch;
-  }
-
-  .byline {
-    margin: 1.75rem 0 0;
-    font-family: var(--display);
-    font-weight: 500;
-    font-size: 1.05rem;
-    color: var(--muted);
-  }
-
-  .byline strong {
-    color: var(--gold);
-    font-weight: 700;
-  }
-
-  /* ---------- Thesis ---------- */
-  .thesis {
-    padding: clamp(2.5rem, 6vw, 4rem) 0 0;
-  }
-
-  .thesis-line {
-    margin: 0 0 1.75rem;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(1.45rem, 3.6vw, 2.25rem);
-    line-height: 1.22;
-    letter-spacing: -0.015em;
-    text-wrap: balance;
-    max-width: 30ch;
-    padding-left: 1.1rem;
-    border-left: 6px solid var(--gold);
-  }
-
-  .thesis p { margin: 0; }
-
-  /* ---------- Headings ---------- */
-  h2 {
-    margin: 0 0 1.5rem;
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: clamp(1.7rem, 4vw, 2.4rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-
-  section { padding: clamp(2.5rem, 6vw, 4.5rem) 0 0; }
-
-  /* ---------- The three tests ---------- */
-  .tests {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .tests li {
-    padding: 1.25rem 1.25rem 1.4rem;
-    background: #fff;
-    border: 1px solid var(--rule);
-    border-top: 5px solid var(--ink);
-    font-size: 1rem;
-    line-height: 1.55;
-  }
-
-  .tests strong {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 1.45rem;
-    letter-spacing: -0.01em;
-  }
-
-  /* ---------- Rich vs poor split ---------- */
-  .split {
-    display: grid;
-    gap: 1.25rem;
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-
-  .col {
-    padding: 1.5rem 1.5rem 0.75rem;
-    border-top: 6px solid;
-  }
-
-  .col.rich { background: var(--rise-tint); border-color: var(--rise); }
-  .col.poor { background: var(--sink-tint); border-color: var(--sink); }
-
-  .col h3 {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin: 0 0 0.5rem;
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 1.35rem;
-    letter-spacing: -0.01em;
-  }
-
-  .rich h3 { color: var(--rise); }
-  .poor h3 { color: var(--sink); }
-
-  /* arrow marks: up for climbing, down for sinking */
-  .col h3::before {
-    content: "";
-    flex: none;
-    width: 0.9rem;
-    height: 0.9rem;
-    background: currentColor;
-  }
-  .rich h3::before { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-  .poor h3::before { clip-path: polygon(0 0, 100% 0, 50% 100%); }
-
-  .col ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .col li {
-    padding: 0.95rem 0;
-    border-top: 1px solid;
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  .rich li { border-color: rgba(14, 107, 63, 0.25); }
-  .poor li { border-color: rgba(180, 56, 44, 0.25); }
-
-  .col li:first-child { border-top: 0; }
-
-  .col li strong {
-    display: block;
-    margin-bottom: 0.2rem;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 1.02rem;
-    line-height: 1.3;
-  }
-
-  /* ---------- Comparison table ---------- */
-  .table-wrap {
-    overflow-x: auto;
-    border: 1px solid var(--rule);
-    background: #fff;
-  }
-
-  table {
-    width: 100%;
-    min-width: 34rem;
-    border-collapse: collapse;
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-
-  th, td {
-    padding: 0.9rem 1rem;
-    text-align: left;
-    vertical-align: top;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  tbody tr:last-child th,
-  tbody tr:last-child td { border-bottom: 0; }
-
-  thead th {
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 1.05rem;
-  }
-
-  thead th.h-poor { background: var(--sink-tint); color: var(--sink); border-bottom: 3px solid var(--sink); }
-  thead th.h-rich { background: var(--rise-tint); color: var(--rise); border-bottom: 3px solid var(--rise); }
-  thead th.h-field { border-bottom: 3px solid var(--ink); }
-
-  tbody th {
-    font-family: var(--display);
-    font-weight: 700;
-    white-space: nowrap;
-  }
-
-  /* ---------- Steps for people with no money ---------- */
-  .steps {
-    list-style: none;
-    counter-reset: step;
-    margin: 0;
-    padding: 0;
-    max-width: 44rem;
-  }
-
-  .steps li {
-    counter-increment: step;
-    position: relative;
-    padding: 0 0 1.4rem 3.4rem;
-    margin: 0 0 1.4rem;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .steps li:last-child { border-bottom: 0; margin-bottom: 0; }
-
-  .steps li::before {
-    content: counter(step);
-    position: absolute;
-    left: 0;
-    top: 0.05rem;
-    width: 2.3rem;
-    height: 2.3rem;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: var(--ink);
-    color: var(--paper);
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 1.05rem;
-  }
-
-  .steps strong {
-    display: block;
-    margin-bottom: 0.15rem;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 1.12rem;
-    line-height: 1.3;
-  }
-
-  /* ---------- Closing ---------- */
-  .closing {
-    margin-top: clamp(3rem, 7vw, 5rem);
-    padding: clamp(2.5rem, 6vw, 4rem) 0;
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .closing h2 { color: #fff; }
-
-  .closing p {
-    margin: 0 0 1.25rem;
-    font-size: 1.15rem;
-    line-height: 1.7;
-  }
-
-  .signoff {
-    margin: 2rem 0 0;
-    padding-top: 1.25rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.25);
-  }
-
-  .signoff em {
-    display: block;
-    font-size: 1.1rem;
-    color: #D5DDD8;
-  }
-
-  .signoff strong {
-    display: block;
-    margin-top: 0.35rem;
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 1.4rem;
-    color: #E3B94F;
-  }
-
-  /* ---------- Responsive ---------- */
-  @media (max-width: 52rem) {
-    .tests { grid-template-columns: 1fr; }
-    .split { grid-template-columns: 1fr; }
-  }
-
-  @media (max-width: 30rem) {
-    body { font-size: 1rem; }
-    .col { padding: 1.25rem 1.1rem 0.5rem; }
-  }
-</style>
 </head>
 
 <body>
 <article>
 
-  <header class="masthead">
-    <div class="wrap">
-      <h1>The Great Divide: Why Some Nigerians Rise While Others Work Harder and Sink</h1>
-      <p class="byline">By <strong>Kaizen Chris</strong></p>
-    </div>
-  </header>
+<header>
+  <h1>The Great Divide: Why Some Nigerians Rise While Others Work Harder and Sink</h1>
+  <p>By <strong>Kaizen Chris</strong></p>
+</header>
 
-  <div class="wrap">
+<hr>
 
-    <div class="thesis">
-      <div class="narrow">
-        <p class="thesis-line">The dividing line isn't the industry. It's whether you own the asset, earn in hard currency, and control distribution, or rent out your time in naira.</p>
-        <p>Two people can finish the same school, work equally hard, and end up in different worlds. The difference is rarely intelligence or character. It's which side of the system they stand on.</p>
-      </div>
-    </div>
+<blockquote>
+  <p><strong>The dividing line isn't the industry. It's whether you own the asset, earn in hard currency, and control distribution, or rent out your time in naira.</strong></p>
+</blockquote>
 
-    <section>
-      <h2>The three tests</h2>
-      <ul class="tests">
-        <li><strong>Currency</strong>Are you paid in dollars or naira? Dollars protect you, naira erodes.</li>
-        <li><strong>Ownership</strong>Do you own the thing, or just work on it?</li>
-        <li><strong>Scale and access</strong>Can you reach credit, contracts, and connections that make money grow faster?</li>
-      </ul>
-    </section>
+<p>Two people can finish the same school, work equally hard, and end up in different worlds. The difference is rarely intelligence or character. It's which side of the system they stand on.</p>
 
-    <!-- ============ PART 1: SKILLS ============ -->
-    <section>
-      <h2>Part 1: Skills</h2>
-      <div class="split">
+<hr>
 
-        <div class="col rich">
-          <h3>Rich getting richer</h3>
-          <ul>
-            <li><strong>Software, AI, and data work sold to foreign clients</strong>A developer in Port Harcourt who builds websites for a client in Canada earns in dollars. When the naira falls, their income rises in naira terms without them doing anything extra.</li>
-            <li><strong>Sales and distribution</strong>Someone who can sell, or who controls how goods reach buyers, earns commissions that rise with prices. Sales is one of the few skills where income grows when the economy gets harder.</li>
-            <li><strong>Finance and dealmaking</strong>People who structure deals, raise money, or connect buyers to sellers get a cut of large transactions. A small percentage of a big deal beats a full salary.</li>
-            <li><strong>Cybersecurity</strong>Every bank, fintech, and company needs protection from hackers, and the skill is scarce, so employers pay well, often in dollars.</li>
-          </ul>
-        </div>
+<section>
+  <h2>The three tests</h2>
+  <ol>
+    <li><strong>Currency:</strong> Are you paid in dollars or naira? Dollars protect you, naira erodes.</li>
+    <li><strong>Ownership:</strong> Do you own the thing, or just work on it?</li>
+    <li><strong>Scale and access:</strong> Can you reach credit, contracts, and connections that make money grow faster?</li>
+  </ol>
+</section>
 
-        <div class="col poor">
-          <h3>Poor getting poorer</h3>
-          <ul>
-            <li><strong>Entry-level clerical work</strong>Typing, filing, and basic office admin have thousands of applicants for every opening, so pay stays low.</li>
-            <li><strong>Low-paid salaried jobs like civil service and teaching</strong>These are respectable and important jobs. The problem is that the salary is fixed in naira while rent, food, and transport keep rising. A teacher on ₦70,000 feels poorer every year without a pay cut.</li>
-            <li><strong>Manual labor</strong>Bricklaying, loading, and factory floor work pay by the day. If you can't work, you don't earn, and the pay rarely keeps up with prices.</li>
-            <li><strong>Any skill sold only for local naira with many competitors</strong>Even a good skill, like graphic design or writing, becomes a poverty trap if you only sell it locally where everyone undercuts each other.</li>
-          </ul>
-        </div>
+<hr>
 
-      </div>
-    </section>
+<!-- ============ PART 1: SKILLS ============ -->
+<section>
+  <h2>Part 1: Skills</h2>
 
-    <!-- ============ PART 2: BUSINESSES ============ -->
-    <section>
-      <h2>Part 2: Businesses</h2>
-      <div class="split">
+  <h3>&#9650; Rich getting richer</h3>
+  <ul>
+    <li><strong>Software, AI, and data work sold to foreign clients:</strong> A developer in Port Harcourt who builds websites for a client in Canada earns in dollars. When the naira falls, their income rises in naira terms without them doing anything extra.</li>
+    <li><strong>Sales and distribution:</strong> Someone who can sell, or who controls how goods reach buyers, earns commissions that rise with prices. Sales is one of the few skills where income grows when the economy gets harder.</li>
+    <li><strong>Finance and dealmaking:</strong> People who structure deals, raise money, or connect buyers to sellers get a cut of large transactions. A small percentage of a big deal beats a full salary.</li>
+    <li><strong>Cybersecurity:</strong> Every bank, fintech, and company needs protection from hackers, and the skill is scarce, so employers pay well, often in dollars.</li>
+  </ul>
 
-        <div class="col rich">
-          <h3>Rich getting richer</h3>
-          <ul>
-            <li><strong>Real estate and land</strong>Land almost never loses value. Someone who bought a plot in Lekki or Abuja years ago for a few million may now hold something worth many times more, while renters kept paying.</li>
-            <li><strong>Fintech and payments</strong>Every transfer, POS transaction, and bill payment pays the platform a small fee. Millions of small fees add up to huge income for the owners.</li>
-            <li><strong>Energy, oil, and gas</strong>Fuel, gas, and power are things everyone must buy, and they're priced in or tied to dollars.</li>
-            <li><strong>Telecom</strong>Everyone needs data and airtime. Owners collect from millions of people monthly.</li>
-            <li><strong>Banking</strong>Banks borrow cheap and lend at high rates. They profit whether the economy is good or bad.</li>
-            <li><strong>Large-scale manufacturing</strong>Making goods in volume (cement, drinks, packaged food) lowers the cost per unit and lets owners undercut small competitors.</li>
-            <li><strong>Logistics</strong>Moving goods between cities and ports is essential, and owners of fleets and warehouses earn from every delivery.</li>
-            <li><strong>Import and export</strong>Someone with access to dollars who imports in bulk gets better prices and sells to smaller traders at a markup.</li>
-            <li><strong>Agribusiness at scale</strong>A big farm with processing and storage earns well because it can hold produce until prices rise. A small farmer must sell right after harvest when prices are lowest.</li>
-          </ul>
-        </div>
+  <h3>&#9660; Poor getting poorer</h3>
+  <ul>
+    <li><strong>Entry-level clerical work:</strong> Typing, filing, and basic office admin have thousands of applicants for every opening, so pay stays low.</li>
+    <li><strong>Low-paid salaried jobs like civil service and teaching:</strong> These are respectable and important jobs. The problem is that the salary is fixed in naira while rent, food, and transport keep rising. A teacher on &#8358;70,000 feels poorer every year without a pay cut.</li>
+    <li><strong>Manual labor:</strong> Bricklaying, loading, and factory floor work pay by the day. If you can't work, you don't earn, and the pay rarely keeps up with prices.</li>
+    <li><strong>Any skill sold only for local naira with many competitors:</strong> Even a good skill, like graphic design or writing, becomes a poverty trap if you only sell it locally where everyone undercuts each other.</li>
+  </ul>
+</section>
 
-        <div class="col poor">
-          <h3>Poor getting poorer</h3>
-          <ul>
-            <li><strong>Petty trading</strong>Selling small quantities of goods leaves thin profit, and one bad price change can wipe out capital.</li>
-            <li><strong>Small shops with rising restocking costs</strong>The shop owner sells a carton of noodles today at last month's price, then discovers restocking costs more. The profit is gone before the goods are sold.</li>
-            <li><strong>Roadside food</strong>Gas, oil, rice, and pepper all cost more, but customers won't pay much more, so margins shrink.</li>
-            <li><strong>Tailoring</strong>Fabric, thread, and electricity costs rise, while customers compare prices and bargain. Cheap imported clothes compete too.</li>
-            <li><strong>Okada, keke, ride-hail, and delivery drivers who rent the vehicle or depend on a platform they don't own</strong>A driver who rents pays the owner daily whether he makes money or not. A platform can cut fares or raise its commission, and the driver has no say. Meanwhile, someone who owns three kekes earns even while resting.</li>
-          </ul>
-        </div>
+<hr>
 
-      </div>
-    </section>
+<!-- ============ PART 2: BUSINESSES ============ -->
+<section>
+  <h2>Part 2: Businesses</h2>
 
-    <!-- ============ PART 3: SYSTEMS ============ -->
-    <section>
-      <h2>Part 3: Systems</h2>
-      <div class="split">
+  <h3>&#9650; Rich getting richer</h3>
+  <ul>
+    <li><strong>Real estate and land:</strong> Land almost never loses value. Someone who bought a plot in Lekki or Abuja years ago for a few million may now hold something worth many times more, while renters kept paying.</li>
+    <li><strong>Fintech and payments:</strong> Every transfer, POS transaction, and bill payment pays the platform a small fee. Millions of small fees add up to huge income for the owners.</li>
+    <li><strong>Energy, oil, and gas:</strong> Fuel, gas, and power are things everyone must buy, and they're priced in or tied to dollars.</li>
+    <li><strong>Telecom:</strong> Everyone needs data and airtime. Owners collect from millions of people monthly.</li>
+    <li><strong>Banking:</strong> Banks borrow cheap and lend at high rates. They profit whether the economy is good or bad.</li>
+    <li><strong>Large-scale manufacturing:</strong> Making goods in volume (cement, drinks, packaged food) lowers the cost per unit and lets owners undercut small competitors.</li>
+    <li><strong>Logistics:</strong> Moving goods between cities and ports is essential, and owners of fleets and warehouses earn from every delivery.</li>
+    <li><strong>Import and export:</strong> Someone with access to dollars who imports in bulk gets better prices and sells to smaller traders at a markup.</li>
+    <li><strong>Agribusiness at scale:</strong> A big farm with processing and storage earns well because it can hold produce until prices rise. A small farmer must sell right after harvest when prices are lowest.</li>
+  </ul>
 
-        <div class="col rich">
-          <h3>Rich getting richer</h3>
-          <ul>
-            <li><strong>Access to dollars</strong>People who can get dollars at official rates, or hold them, are protected while others buy at higher market prices.</li>
-            <li><strong>Cheap bank credit</strong>A big company borrows at a lower rate with collateral and connections. A market woman borrows from a cooperative or loan app at a much higher cost.</li>
-            <li><strong>Political connections and government contracts</strong>One contract can be worth more than a small business earns in a lifetime. Knowing the right person opens doors that hard work alone doesn't.</li>
-            <li><strong>Land titles</strong>Papers such as a Certificate of Occupancy let you use land as collateral, sell it safely, and avoid disputes. Without papers, land is risky and hard to borrow against.</li>
-            <li><strong>Diaspora income</strong>A family with a relative abroad receives dollars, pounds, or euros regularly, often used to buy land or start a business back home.</li>
-            <li><strong>Private power, water, and security</strong>Solar, a borehole, and a security team protect owners from failing public services and cut their daily costs.</li>
-          </ul>
-        </div>
+  <h3>&#9660; Poor getting poorer</h3>
+  <ul>
+    <li><strong>Petty trading:</strong> Selling small quantities of goods leaves thin profit, and one bad price change can wipe out capital.</li>
+    <li><strong>Small shops with rising restocking costs:</strong> The shop owner sells a carton of noodles today at last month's price, then discovers restocking costs more. The profit is gone before the goods are sold.</li>
+    <li><strong>Roadside food:</strong> Gas, oil, rice, and pepper all cost more, but customers won't pay much more, so margins shrink.</li>
+    <li><strong>Tailoring:</strong> Fabric, thread, and electricity costs rise, while customers compare prices and bargain. Cheap imported clothes compete too.</li>
+    <li><strong>Okada, keke, ride-hail, and delivery drivers who rent the vehicle or depend on a platform they don't own:</strong> A driver who rents pays the owner daily whether he makes money or not. A platform can cut fares or raise its commission, and the driver has no say. Meanwhile, someone who owns three kekes earns even while resting.</li>
+  </ul>
+</section>
 
-        <div class="col poor">
-          <h3>Poor getting poorer</h3>
-          <ul>
-            <li><strong>Naira devaluation and inflation</strong>Savings in a bank account slowly lose value. ₦500,000 saved a few years ago buys much less now.</li>
-            <li><strong>Food and fuel price spikes</strong>The poor spend most of their income on food and transport, so price jumps hit them hardest.</li>
-            <li><strong>No access to affordable credit</strong>Without collateral or connections, people borrow at high interest or not at all, so they can't grow.</li>
-            <li><strong>Generator and other self-provided infrastructure costs</strong>A poor household buying fuel, paying for water, and topping up meters spends a larger share of income on things that should be public services.</li>
-            <li><strong>Weak public education and healthcare</strong>A family that can't afford private schools or hospitals gets less education and worse health, and a single medical emergency can wipe out years of savings.</li>
-            <li><strong>Brain drain</strong>Skilled people like nurses, doctors, engineers, and developers leave for better pay abroad. Those left behind face fewer skilled professionals and weaker services.</li>
-          </ul>
-        </div>
+<hr>
 
-      </div>
-    </section>
+<!-- ============ PART 3: SYSTEMS ============ -->
+<section>
+  <h2>Part 3: Systems</h2>
 
-    <!-- ============ TABLE ============ -->
-    <section>
-      <h2>The same field can land in either group</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th class="h-field" scope="col">Field</th>
-              <th class="h-poor" scope="col">Poor side</th>
-              <th class="h-rich" scope="col">Rich side</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Developer</th>
-              <td>Paid in naira by a local employer</td>
-              <td>Paid in dollars by global clients, or owns a product</td>
-            </tr>
-            <tr>
-              <th scope="row">Rider or driver</th>
-              <td>Rents the vehicle or depends on the platform</td>
-              <td>Owns a fleet of vehicles</td>
-            </tr>
-            <tr>
-              <th scope="row">Farmer</th>
-              <td>Sells at harvest to middlemen</td>
-              <td>Stores, processes, and sells at better prices</td>
-            </tr>
-            <tr>
-              <th scope="row">Trader</th>
-              <td>Buys small and sells small</td>
-              <td>Imports or buys in bulk and supplies other traders</td>
-            </tr>
-            <tr>
-              <th scope="row">Teacher</th>
-              <td>Fixed salary only</td>
-              <td>Salary plus an online tutoring business or paid content</td>
-            </tr>
-            <tr>
-              <th scope="row">Houseowner</th>
-              <td>Rents and pays rising rent</td>
-              <td>Owns property and collects rent</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+  <h3>&#9650; Rich getting richer</h3>
+  <ul>
+    <li><strong>Access to dollars:</strong> People who can get dollars at official rates, or hold them, are protected while others buy at higher market prices.</li>
+    <li><strong>Cheap bank credit:</strong> A big company borrows at a lower rate with collateral and connections. A market woman borrows from a cooperative or loan app at a much higher cost.</li>
+    <li><strong>Political connections and government contracts:</strong> One contract can be worth more than a small business earns in a lifetime. Knowing the right person opens doors that hard work alone doesn't.</li>
+    <li><strong>Land titles:</strong> Papers such as a Certificate of Occupancy let you use land as collateral, sell it safely, and avoid disputes. Without papers, land is risky and hard to borrow against.</li>
+    <li><strong>Diaspora income:</strong> A family with a relative abroad receives dollars, pounds, or euros regularly, often used to buy land or start a business back home.</li>
+    <li><strong>Private power, water, and security:</strong> Solar, a borehole, and a security team protect owners from failing public services and cut their daily costs.</li>
+  </ul>
 
-    <!-- ============ STEPS ============ -->
-    <section>
-      <h2>If you're starting with no money</h2>
-      <ol class="steps">
-        <li><strong>Learn a skill that can be paid in hard currency</strong>Software, design, writing, video editing, digital marketing, data, or cybersecurity. Free and cheap online resources exist.</li>
-        <li><strong>Sell to people outside Nigeria</strong>Even small freelance jobs pay in dollars, and that difference in currency matters a lot.</li>
-        <li><strong>Own something, however small</strong>A product, template, audience, tool, or service that keeps earning after the work is done.</li>
-        <li><strong>Turn income into assets</strong>Land, equipment, dollar savings, or a stake in a business, not naira sitting idle.</li>
-        <li><strong>Avoid expensive debt</strong>High-interest loans and borrowing for lifestyle keep you on the poor side.</li>
-        <li><strong>Guard your time and attention</strong>Hours lost to TikTok, betting, and endless entertainment are hours not spent building the skill that moves you across.</li>
-      </ol>
-    </section>
+  <h3>&#9660; Poor getting poorer</h3>
+  <ul>
+    <li><strong>Naira devaluation and inflation:</strong> Savings in a bank account slowly lose value. &#8358;500,000 saved a few years ago buys much less now.</li>
+    <li><strong>Food and fuel price spikes:</strong> The poor spend most of their income on food and transport, so price jumps hit them hardest.</li>
+    <li><strong>No access to affordable credit:</strong> Without collateral or connections, people borrow at high interest or not at all, so they can't grow.</li>
+    <li><strong>Generator and other self-provided infrastructure costs:</strong> A poor household buying fuel, paying for water, and topping up meters spends a larger share of income on things that should be public services.</li>
+    <li><strong>Weak public education and healthcare:</strong> A family that can't afford private schools or hospitals gets less education and worse health, and a single medical emergency can wipe out years of savings.</li>
+    <li><strong>Brain drain:</strong> Skilled people like nurses, doctors, engineers, and developers leave for better pay abroad. Those left behind face fewer skilled professionals and weaker services.</li>
+  </ul>
+</section>
 
-  </div>
+<hr>
 
-  <!-- ============ CLOSING ============ -->
-  <footer class="closing">
-    <div class="wrap">
-      <div class="narrow">
-        <h2>Final thought</h2>
-        <p>The system doesn't reward the hardest worker. It rewards whoever holds assets, earns in strong currency, and has access. You can't change the whole system overnight, but you can change which side of it you stand on.</p>
-        <div class="signoff">
-          <em>I say this to enlighten you.</em>
-          <strong>Kaizen Chris</strong>
-        </div>
-      </div>
-    </div>
-  </footer>
+<!-- ============ TABLE ============ -->
+<section>
+  <h2>The same field can land in either group</h2>
+  <table border="1" cellpadding="8" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th scope="col" align="left">Field</th>
+        <th scope="col" align="left">&#9660; Poor side</th>
+        <th scope="col" align="left">&#9650; Rich side</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" align="left">Developer</th>
+        <td>Paid in naira by a local employer</td>
+        <td>Paid in dollars by global clients, or owns a product</td>
+      </tr>
+      <tr>
+        <th scope="row" align="left">Rider or driver</th>
+        <td>Rents the vehicle or depends on the platform</td>
+        <td>Owns a fleet of vehicles</td>
+      </tr>
+      <tr>
+        <th scope="row" align="left">Farmer</th>
+        <td>Sells at harvest to middlemen</td>
+        <td>Stores, processes, and sells at better prices</td>
+      </tr>
+      <tr>
+        <th scope="row" align="left">Trader</th>
+        <td>Buys small and sells small</td>
+        <td>Imports or buys in bulk and supplies other traders</td>
+      </tr>
+      <tr>
+        <th scope="row" align="left">Teacher</th>
+        <td>Fixed salary only</td>
+        <td>Salary plus an online tutoring business or paid content</td>
+      </tr>
+      <tr>
+        <th scope="row" align="left">Houseowner</th>
+        <td>Rents and pays rising rent</td>
+        <td>Owns property and collects rent</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr>
+
+<!-- ============ STEPS ============ -->
+<section>
+  <h2>If you're starting with no money</h2>
+  <ol>
+    <li><strong>Learn a skill that can be paid in hard currency:</strong> Software, design, writing, video editing, digital marketing, data, or cybersecurity. Free and cheap online resources exist.</li>
+    <li><strong>Sell to people outside Nigeria:</strong> Even small freelance jobs pay in dollars, and that difference in currency matters a lot.</li>
+    <li><strong>Own something, however small:</strong> A product, template, audience, tool, or service that keeps earning after the work is done.</li>
+    <li><strong>Turn income into assets:</strong> Land, equipment, dollar savings, or a stake in a business, not naira sitting idle.</li>
+    <li><strong>Avoid expensive debt:</strong> High-interest loans and borrowing for lifestyle keep you on the poor side.</li>
+    <li><strong>Guard your time and attention:</strong> Hours lost to TikTok, betting, and endless entertainment are hours not spent building the skill that moves you across.</li>
+  </ol>
+</section>
+
+<hr>
+
+<!-- ============ CLOSING ============ -->
+<footer>
+  <h2>Final thought</h2>
+  <p>The system doesn't reward the hardest worker. It rewards whoever holds assets, earns in strong currency, and has access. You can't change the whole system overnight, but you can change which side of it you stand on.</p>
+  <p><em>I say this to enlighten you.</em></p>
+  <p><strong>&mdash; Kaizen Chris</strong></p>
+</footer>
 
 </article>
 </body>
